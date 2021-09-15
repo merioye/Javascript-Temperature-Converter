@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Temperature Converter</title>
+        <style>
+            *{
+                margin:0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body{
+                height: 100vh;
+                width: 100vw;
+                background-color: #f5b64275;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #container{
+                background-color: #e9947a9b;
+                height: 50vh;
+                width: 60vw;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px black;
+                padding: 50px 100px;
+            }
+            p{
+                font-size: 2.2rem;
+                letter-spacing: 1px;
+                text-align: center;
+            }
+            #input-cover{
+                width: 210px;
+                height: 150px;
+                margin: auto;
+                padding-top: 40px;
+                /* border: 1px solid blue; */
+                position: relative;
+            }
+            #value{
+                width: 100px;
+                height: 40px;
+                font-size: 1.4rem;
+                padding-left: 8px;
+            }
+            #option-list{
+                width: 100px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            #submit-btn{
+                background-color: black;
+                color: white;
+                font-weight: 700;
+                font-size: 1.2rem;
+                padding: 5px 20px;
+                border-radius: 5px;
+                position: absolute;
+                bottom: 0;
+                left: 23%;
+                cursor: pointer;
+            }
+            #submit-btn:hover{
+                background-color: rgba(0, 0, 0, 0.383);
+            }
+        </style>
+    </head>
+    <body>
+        <section id='container'>
+            <p>Please enter the temperature you'd like to convert.</p>
+            <div id='input-cover'>
+                <input type='number' id='value' placeholder='Value'>
+                <select id='option-list'>
+                    <option>Celsius</option>
+                    <option>Fahrenheit</option>
+                </select>
+                <button id='submit-btn'>Submit</button>
+            </div>
+            <div id='result'></div>
+            
+        </section>
+        <script>
+            let inputValue = document.querySelector('#value');
+            let optionList = document.querySelector('#option-list');
+            let submitBtn = document.querySelector('#submit-btn');
+            let selectedOption;
+            let temp;
+
+            const convertTemp = ()=>{
+                
+                if(selectedOption=='Celsius'){
+                    temp = (((9/5)*inputValue.value)+32) +' Fahrenheight';
+                }else{
+                    temp = ((5/9)*(inputValue.value-32))+' Celsius';
+                }
+            }
+            submitBtn.addEventListener('click',()=>{
+                selectedOption = optionList.options[optionList.selectedIndex].value;
+                convertTemp();
+                document.querySelector('#result').innerHTML = `<p style='margin-top: 15px;'>${temp}</p>`;
+            });
+        </script>
+    </body>
+</html>
